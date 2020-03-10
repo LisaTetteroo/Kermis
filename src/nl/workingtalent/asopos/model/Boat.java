@@ -72,6 +72,9 @@ public class Boat {
                 "boatID=" + boatID +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
+                ", weightClass='" + weightClass + '\'' +
+                ", topTeamBoat=" + topTeamBoat +
+                ", privateBoat=" + privateBoat +
                 ", available=" + available +
                 '}';
     }

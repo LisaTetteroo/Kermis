@@ -18,7 +18,8 @@ public class Application {
         dwars.setName("Dwars");
         knorretje.setName("Knorretje");
         canton.setName("Canton");
-        bluesbrother.setName("Blues Brothers");
+        bluesbrother.setName("Blues n
+        Brothers");
         aquarius.setName("Aquarius");
 
         dwars.setType("B4+");
@@ -31,7 +32,8 @@ public class Application {
         dock.addBoat(knorretje);
         dock.addBoat(canton);
         dock.addBoat(bluesbrother);
-        dock.addBoat(aquarius);
+        dock.addBoat(aquarius);q
+
 
         dock.printBoats();
 
