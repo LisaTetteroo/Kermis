@@ -3,5 +3,8 @@ public class LadderKlimmen extends Attractie{
         naam = "Ladder klimmen";
         prijs = 5.00;
         oppervlakte = 10;
+        omzet = 0;
+        aantalKaartjesVerkocht = 0;
+
     }
 }
