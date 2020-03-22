@@ -5,6 +5,6 @@ public class SpiegelPaleis extends Attractie {
         oppervlakte = 10;
         omzet = 0;
         aantalKaartjesVerkocht = 0;
-
+        omzetVoorBelasting = 0;
     }
 }
