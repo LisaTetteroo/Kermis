@@ -6,6 +6,7 @@ public class Kermis {
     String optieKeuze;
     ArrayList<Attractie> attracties = new ArrayList<>();
     Kassa kassa = new Kassa();
+    BelastingInspecteur inspectorGadget = new BelastingInspecteur();
 
     public Kermis() {
         attracties.add(new Botsauto());
@@ -14,13 +15,25 @@ public class Kermis {
         attracties.add(new Spookhuis());
         attracties.add(new Hawaii());
         attracties.add(new LadderKlimmen());
+
+        for (Attractie a:attracties) {
+            if (a instanceof RisicoRijkeAttractie) {
+                ((RisicoRijkeAttractie) a).opstellingsKeuring();
+            }
+        }
     }
 
     public void startKermis () {
         while (true) {
-            optieKeuze = kiesOptie().toUpperCase();
-            attractieDraaien(optieKeuze);
             System.out.println();
+            optieKeuze = kiesOptie().toUpperCase();
+            System.out.println();
+            attractieDraaien(optieKeuze);
+            draaiLimietChecken();
+            double belastingRandom = Math.random()*15;
+            if ((int) belastingRandom == 6) {
+                inspectorGadget.belastingInnen(attracties, kassa);
+            }
         }
 
     }
@@ -42,22 +55,23 @@ public class Kermis {
 
     public void attractieDraaien(String optie) {
         switch (optie) {
-            case "1": attracties.get(0).draaien(); break;
-            case "2": attracties.get(1).draaien(); break;
-            case "3": attracties.get(2).draaien(); break;
-            case "4": attracties.get(3).draaien(); break;
-            case "5": attracties.get(4).draaien(); break;
-            case "6": attracties.get(5).draaien(); break;
+            case "1": attracties.get(0).draaien(kassa); break;
+            case "2": attracties.get(1).draaien(kassa); break;
+            case "3": attracties.get(2).draaien(kassa); break;
+            case "4": attracties.get(3).draaien(kassa); break;
+            case "5": attracties.get(4).draaien(kassa); break;
+            case "6": attracties.get(5).draaien(kassa); break;
             case "O":
                 for (int i = 0; i < attracties.size(); i++) {
-                    System.out.println(attracties.get(i).naam + " heeft "+ attracties.get(i).omzetBerekenen() + " omgezet.");
+                    System.out.println(attracties.get(i).naam + " heeft "+ attracties.get(i).omzet + " omgezet.");
                 }
-                System.out.println("Totale omzet is: " + kassa.totaalOmzetBerekenen(attracties));break;
+                System.out.println("Totale omzet is: " + kassa.totaalOmzetKermis);break;
             case "K":
                 for (int i = 0; i < attracties.size(); i++) {
                     System.out.println("Voor " + attracties.get(i).naam + " zijn "+ attracties.get(i).aantalKaartjesVerkocht + " kaartjes verkocht.");
                 }
-                System.out.println("Totale aantal verkochte kaartjes is: " + kassa.totaalKaartjesBereken(attracties));break;
+                System.out.println("Totale aantal verkochte kaartjes is: " + kassa.totaalAantalKaartjes);break;
+            case "B": inspectorGadget.belastingInnen(attracties, kassa); break; // niet in menu opgenomen, maar wel in switch laten staan voor testen
             case "Q":
                 System.out.println("Kermis is gesloten");
                 System.exit(1);
@@ -66,10 +80,17 @@ public class Kermis {
                 kiesOptie();
         }
     }
+
+    void draaiLimietChecken() {
+        for (Attractie a : attracties) {
+            if (a instanceof RisicoRijkeAttractie) {
+                if (((a.naam.equals("Spin")) && (((RisicoRijkeAttractie) a).kaartjesTeller == 5))
+                        || ((a.naam.equals("Hawaii")) && (((RisicoRijkeAttractie) a).kaartjesTeller  == 10))) {
+                    ((RisicoRijkeAttractie) a).onderhoud();
+                    ((Attractie) a).kaartjesTeller = 0;
+                }
+            }
+        }
+    }
 }
 
-/*
-+
-                "O voor omzet\n" +
-                "K voor aantal kaartjes")
- */
