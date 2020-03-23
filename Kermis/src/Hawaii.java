@@ -5,7 +5,8 @@ public class Hawaii extends RisicoRijkeAttractie {
         oppervlakte = 10;
         omzet = 0;
         aantalKaartjesVerkocht = 0;
-        kaartjesTeller = 0;
+        draaiLimiet = 10;
+        draaiLimietTeller = draaiLimiet;
         omzetVoorBelasting = 0;
     }
 }
