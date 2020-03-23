@@ -5,7 +5,8 @@ public class Spin extends  RisicoRijkeAttractie  {
         oppervlakte = 10;
         omzet = 0;
         aantalKaartjesVerkocht = 0;
-        kaartjesTeller = 0;
+        draaiLimiet = 5;
+        draaiLimietTeller = draaiLimiet;
         omzetVoorBelasting = 0;
     }
 

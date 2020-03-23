@@ -7,12 +7,10 @@ abstract class Attractie {
     double omzet;
     int aantalKaartjesVerkocht;
     double omzetVoorBelasting;
-    int kaartjesTeller;
 
     void draaien(Kassa k) {
         System.out.println(naam + " draait.");
         aantalKaartjesVerkocht++;
-        kaartjesTeller++;
         k.totaalAantalKaartjes++;
         omzet += prijs;
         k.totaalOmzetKermis += prijs;

@@ -29,7 +29,6 @@ public class Kermis {
             optieKeuze = kiesOptie().toUpperCase();
             System.out.println();
             attractieDraaien(optieKeuze);
-            draaiLimietChecken();
             double belastingRandom = Math.random()*15;
             if ((int) belastingRandom == 6) {
                 inspectorGadget.belastingInnen(attracties, kassa);
@@ -48,6 +47,7 @@ public class Kermis {
                 "6 voor ladderklimmen\n"+
                 "O voor omzet\n" +
                 "K voor aantal kaartjes\n" +
+                "M voor monteur bellen ivm draailimiet\n" +
                 "Q voor kermis sluiten");
         optieKeuze = sc.nextLine();
         return optieKeuze;
@@ -72,6 +72,17 @@ public class Kermis {
                 }
                 System.out.println("Totale aantal verkochte kaartjes is: " + kassa.totaalAantalKaartjes);break;
             case "B": inspectorGadget.belastingInnen(attracties, kassa); break; // niet in menu opgenomen, maar wel in switch laten staan voor testen
+            case "M":
+                String monteurVoorAttractie = monteurBellen();
+                switch (monteurVoorAttractie) {
+                    case "1": ((RisicoRijkeAttractie) attracties.get(1)).onderhoud(); break;
+                    case "2": ((RisicoRijkeAttractie) attracties.get(4)).onderhoud(); break;
+                    default:
+                        System.out.println("Sorry onjuiste invoer, probeer opnieuw");
+                        monteurBellen();
+                }
+                break;
+
             case "Q":
                 System.out.println("Kermis is gesloten");
                 System.exit(1);
@@ -81,6 +92,15 @@ public class Kermis {
         }
     }
 
+    String monteurBellen() {
+        String attractieVoorOnderhoud;
+        System.out.println("Voor welke attractie is draai limiet onderhoud nodig? Kies een attractie, type bijhorend getal:\n" +
+                "1 voor spin\n" +
+                "2 voor hawaii");
+        attractieVoorOnderhoud = sc.nextLine();
+        return attractieVoorOnderhoud;
+    }
+    /*
     void draaiLimietChecken() {
         for (Attractie a : attracties) {
             if (a instanceof RisicoRijkeAttractie) {
@@ -92,5 +112,6 @@ public class Kermis {
             }
         }
     }
+    */
 }
 
